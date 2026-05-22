@@ -10,11 +10,10 @@ const galleryItems = document.querySelectorAll('.gallery-img');
 const currentYear = document.getElementById('year');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const safeText = (text) => text ? String(text) : '';
-
 let navStatePushed = false;
 
 const toggleNavigation = () => {
+  if (!navToggle || !navMenu) return;
   const expanded = navToggle.getAttribute('aria-expanded') === 'true';
 
   if (!expanded) {
@@ -32,8 +31,8 @@ const toggleNavigation = () => {
 };
 
 const closeNavigation = (shouldPopHistory = false) => {
-  if (!navMenu.classList.contains('is-open')) return;
-  navToggle.setAttribute('aria-expanded', 'false');
+  if (!navMenu || !navMenu.classList.contains('is-open')) return;
+  if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
   navMenu.classList.remove('is-open');
 
   if (shouldPopHistory && navStatePushed) {
@@ -44,6 +43,7 @@ const closeNavigation = (shouldPopHistory = false) => {
 };
 
 const handleNavLinkClick = (event) => {
+  if (!navMenu || !navToggle) return;
   const isHashLink = event.currentTarget.hash && event.currentTarget.pathname === window.location.pathname;
 
   if (window.innerWidth <= 900) {
@@ -58,8 +58,8 @@ const handleNavLinkClick = (event) => {
 
 const handleScroll = () => {
   const offset = window.scrollY;
-  navbar.classList.toggle('scrolled', offset > 24);
-  backToTop.classList.toggle('visible', offset > window.innerHeight * 0.5);
+  if (navbar) navbar.classList.toggle('scrolled', offset > 24);
+  if (backToTop) backToTop.classList.toggle('visible', offset > window.innerHeight * 0.5);
 };
 
 const animateStats = (entry) => {
@@ -70,7 +70,6 @@ const animateStats = (entry) => {
     if (!valueElement || valueElement.dataset.animated) return;
 
     const target = Number(valueElement.dataset.count || 0);
-    const suffix = item.querySelector('.stat-suffix')?.textContent || '';
     const start = performance.now();
     const duration = 1200;
 
@@ -96,11 +95,11 @@ const loadGalleryImage = (container) => {
   if (!imgSrc || container.dataset.loaded) return;
 
   const parent = container.closest('.gallery-item');
-  const caption = parent?.querySelector('.gallery-caption span')?.textContent || 'Galerija';
+  const captionText = parent?.querySelector('.gallery-caption span')?.textContent || 'Galerija';
   const image = document.createElement('img');
   image.loading = 'lazy';
   image.decoding = 'async';
-  image.alt = safeText(caption);
+  image.alt = captionText ? String(captionText) : '';
   image.src = imgSrc;
   image.addEventListener('error', () => {
     image.remove();
@@ -112,34 +111,29 @@ const loadGalleryImage = (container) => {
 
 const observeAnimations = () => {
   if (prefersReducedMotion) {
-    animatedElements.forEach((element) => {
-      element.classList.add('is-visible');
-    });
+    animatedElements.forEach((el) => el.classList.add('is-visible'));
     statsItems.forEach((item) => {
       const number = item.querySelector('.stat-number');
-      if (number) {
-        number.textContent = number.dataset.count || '0';
-      }
+      if (number) number.textContent = number.dataset.count || '0';
     });
     galleryItems.forEach(loadGalleryImage);
     return;
   }
 
-  const observerOptions = {
-    threshold: 0.2,
-  };
+  const observerOptions = { threshold: 0.2 };
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('is-visible');
-      if (entry.target.dataset.animate === 'fade-up' || entry.target.dataset.animate === 'fade-left' || entry.target.dataset.animate === 'fade-right') {
+      const anim = entry.target.dataset.animate;
+      if (anim === 'fade-up' || anim === 'fade-left' || anim === 'fade-right') {
         observer.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  animatedElements.forEach((element) => revealObserver.observe(element));
+  animatedElements.forEach((el) => revealObserver.observe(el));
 
   const statsObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach((entry) => {
@@ -171,14 +165,10 @@ const createHeroParticles = () => {
   for (let i = 0; i < particleCount; i += 1) {
     const particle = document.createElement('span');
     particle.className = 'particle';
-    const left = Math.random() * 100;
-    const top = Math.random() * 100;
-    const delay = (Math.random() * 8).toFixed(2);
-    const duration = 6 + Math.random() * 8;
-    particle.style.left = `${left}%`;
-    particle.style.top = `${top}%`;
-    particle.style.setProperty('--delay', `${delay}s`);
-    particle.style.setProperty('--dur', `${duration}s`);
+    particle.style.left = `${Math.random() * 100}%`;
+    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.setProperty('--delay', `${(Math.random() * 8).toFixed(2)}s`);
+    particle.style.setProperty('--dur', `${(6 + Math.random() * 8).toFixed(2)}s`);
     fragment.appendChild(particle);
   }
 
@@ -186,14 +176,14 @@ const createHeroParticles = () => {
 };
 
 const handleEscape = (event) => {
-  if (event.key === 'Escape' && navMenu.classList.contains('is-open')) {
+  if (event.key === 'Escape' && navMenu && navMenu.classList.contains('is-open')) {
     closeNavigation();
-    navToggle.focus();
+    if (navToggle) navToggle.focus();
   }
 };
 
 // Close nav when browser back/forward is used
-window.addEventListener('popstate', (e) => {
+window.addEventListener('popstate', () => {
   if (navMenu && navMenu.classList.contains('is-open')) {
     closeNavigation();
   }
@@ -219,6 +209,7 @@ const setYear = () => {
 
 const init = () => {
   setYear();
+
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', toggleNavigation);
     navToggle.addEventListener('keydown', (event) => {
@@ -240,7 +231,7 @@ const init = () => {
   }, { passive: true });
 
   window.addEventListener('resize', () => {
-    if (window.innerWidth > 900 && navMenu.classList.contains('is-open')) {
+    if (navMenu && window.innerWidth > 900 && navMenu.classList.contains('is-open')) {
       closeNavigation();
     }
   });

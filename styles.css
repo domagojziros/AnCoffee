@@ -1,11 +1,4 @@
-/* ==========================================================================
-   AN COFFEE — styles.css
-   Production-ready CSS · Mobile-first · CSS Variables · BEM-inspired
-   ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   1. CSS CUSTOM PROPERTIES
--------------------------------------------------------------------------- */
 :root {
   /* Brand Colors */
   --clr-espresso:      #1a0f07;
@@ -84,6 +77,8 @@
 
   /* Navbar */
   --navbar-h: 72px;
+  /* Safe-area inset for devices with notch/status bars */
+  --safe-top: env(safe-area-inset-top, 0px);
 }
 
 /* --------------------------------------------------------------------------
@@ -114,11 +109,18 @@ body {
   color: var(--text-primary);
   background-color: var(--bg-primary);
   overflow-x: hidden;
-  padding-top: var(--navbar-h);
+  /* Reserve space for the fixed navbar + any device safe area */
+  padding-top: calc(var(--navbar-h) + var(--safe-top));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
+
+/* Ensure root elements occupy full height to avoid viewport resizing jumps */
+html, body { height: 100%; }
+
+/* Mobile touch scrolling smoothing */
+body { -webkit-overflow-scrolling: touch; }
 
 ::-webkit-scrollbar       { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-secondary); }
@@ -290,8 +292,14 @@ address { font-style: normal; }
   width: 100%;
   z-index: 1000;
   height: var(--navbar-h);
+  box-sizing: border-box;
+  /* Ensure the navbar stays visually fixed and avoids subpixel jank */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform, top;
   transition: background var(--trans-slow), box-shadow var(--trans-slow);
-  will-change: background, box-shadow;
 }
 
 .navbar.scrolled {
@@ -1466,11 +1474,11 @@ a.contact-value:hover { color: var(--accent); }
   :root { --navbar-h: 64px; }
 
   .nav-toggle { display: flex; }
-  .nav-container { position: relative; }
+  .nav-container { position: static; }
 
   .nav-menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
+    position: fixed;
+    top: var(--navbar-h);
     right: 0;
     left: 0;
     width: 100%;
@@ -1490,7 +1498,7 @@ a.contact-value:hover { color: var(--accent); }
     transition: transform var(--trans-slow), opacity var(--trans-slow);
     opacity: 0;
     pointer-events: none;
-    z-index: 1001;
+    z-index: 999;
   }
   .nav-menu::before {
     content: '';
@@ -1499,10 +1507,6 @@ a.contact-value:hover { color: var(--accent); }
     background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 45%);
     border-radius: inherit;
     pointer-events: none;
-  }
-  .nav-toggle {
-    position: relative;
-    z-index: 1002;
   }
   .nav-menu.is-open {
     transform: translateY(0) scaleY(1);
@@ -1535,8 +1539,6 @@ a.contact-value:hover { color: var(--accent); }
     margin-top: var(--space-3);
     padding: var(--space-3) var(--space-6);
     border-radius: var(--radius-sm);
-  }
-  .nav-cta {
     margin-top: var(--space-4);
   }
 
