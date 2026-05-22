@@ -165,8 +165,8 @@ const createHeroParticles = () => {
   for (let i = 0; i < particleCount; i += 1) {
     const particle = document.createElement('span');
     particle.className = 'particle';
-    particle.style.left = `${Math.random() * 100}%`;
-    particle.style.top = `${Math.random() * 100}%`;
+    particle.style.left = `${Math.random() * 96}%`;
+    particle.style.top = `${Math.random() * 96}%`;
     particle.style.setProperty('--delay', `${(Math.random() * 8).toFixed(2)}s`);
     particle.style.setProperty('--dur', `${(6 + Math.random() * 8).toFixed(2)}s`);
     fragment.appendChild(particle);

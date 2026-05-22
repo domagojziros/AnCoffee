@@ -108,7 +108,7 @@ body {
   line-height: 1.65;
   color: var(--text-primary);
   background-color: var(--bg-primary);
-  overflow-x: hidden;
+  overflow-x: clip;
   /* Reserve space for the fixed navbar + any device safe area */
   padding-top: calc(var(--navbar-h) + var(--safe-top));
   -webkit-font-smoothing: antialiased;
@@ -293,12 +293,6 @@ address { font-style: normal; }
   z-index: 1000;
   height: var(--navbar-h);
   box-sizing: border-box;
-  /* Ensure the navbar stays visually fixed and avoids subpixel jank */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  will-change: transform, top;
   transition: background var(--trans-slow), box-shadow var(--trans-slow);
 }
 
@@ -425,6 +419,7 @@ address { font-style: normal; }
 -------------------------------------------------------------------------- */
 .hero {
   position: relative;
+  min-height: 100vh;
   min-height: 100svh;
   display: flex;
   align-items: center;
@@ -1645,4 +1640,31 @@ a.contact-value:hover { color: var(--accent); }
   .navbar, .back-to-top, .hero-scroll { display: none; }
   body { background: #fff; color: #000; }
   .hero { min-height: auto; padding: 2rem 0; }
+}
+
+/* --------------------------------------------------------------------------
+   19. MOBILE OVERFLOW FIX
+-------------------------------------------------------------------------- */
+html {
+  overflow-x: clip;
+}
+
+.hero,
+.hero-bg,
+.hero-particles,
+.hero-content,
+.hero-visual {
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.particle {
+  /* Contain particles strictly inside hero, prevent layout bleed */
+  contain: strict;
+}
+
+/* Prevent any section from causing horizontal overflow */
+section, footer, header {
+  max-width: 100vw;
+  overflow-x: clip;
 }
