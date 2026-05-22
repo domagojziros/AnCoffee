@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="hr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Primary Meta Tags -->
+  <title>An Coffee — Premium Aparati za Kavu, Čaj & Grickalice</title>
+  <meta name="description" content="An Coffee nudi premium automate za kavu, čaj, toplu čokoladu, sokove i grickalice za škole, firme i domove. Elegantno rješenje za svaki prostor." />
+  <meta name="keywords" content="aparati za kavu, automati za kavu, vending automati, škole, firme, domovi, čaj, topla čokolada, sokovi, grickalice" />
+  <meta name="author" content="An Coffee" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#1a0f07" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://ancoffee.hr/" />
+  <meta property="og:title" content="An Coffee — Premium Aparati za Kavu & Grickalice" />
+  <meta property="og:description" content="Premium vending rješenja za kavu, čaj, toplu čokoladu i grickalice. Namijenjeno školama, firmama i domovima." />
+  <meta property="og:image" content="https://ancoffee.hr/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="hr_HR" />
+  <meta property="og:site_name" content="An Coffee" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://ancoffee.hr/" />
+  <meta name="twitter:title" content="An Coffee — Premium Aparati za Kavu & Grickalice" />
+  <meta name="twitter:description" content="Premium vending rješenja za kavu, čaj, toplu čokoladu i grickalice." />
+  <meta name="twitter:image" content="https://ancoffee.hr/og-image.jpg" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://ancoffee.hr/" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Schema.org LocalBusiness -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "An Coffee",
+    "description": "Premium vending rješenja za kavu, čaj, toplu čokoladu, sokove i grickalice za škole, firme i domove.",
+    "url": "https://ancoffee.hr",
+    "telephone": "+385994896273",
+    "email": "ancoffee1@gmail.com",
+    "foundingDate": "2020",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ulica Lipa 26",
+      "addressLocality": "Vinkovci",
+      "addressRegion": "Vukovarsko-srijemska",
+      "postalCode": "32100",
+      "addressCountry": "HR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 45.2900,
+      "longitude": 18.8070
+    },
+    "openingHours": "Mo-Fr 08:00-17:00",
+    "priceRange": "€€",
+    "servesCuisine": "Kava i napitci",
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=100006130369375",
+      "https://www.instagram.com/puljicante42/"
+    ],
+    "founder": {
+      "@type": "Person",
+      "name": "Ante Puljić"
+    }
+  }
+  </script>
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a0f07'/><text y='24' x='4' font-size='20'>☕</text></svg>" />
+</head>
+
+<body>
+
+  <!-- ============ SKIP LINK ============ -->
+  <a href="#main-content" class="skip-link">Preskoči na sadržaj</a>
+
+  <!-- ============ NAVBAR ============ -->
+  <header class="navbar" id="navbar" role="banner">
+    <nav class="nav-container" aria-label="Glavna navigacija">
+      <a href="#" class="nav-logo" aria-label="An Coffee – Povratak na početak">
+        <span class="logo-mark" aria-hidden="true">☕</span>
+        <span class="logo-text">An <em>Coffee</em></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Otvori izbornik">
+        <span class="hamburger" aria-hidden="true"></span>
+        <span class="hamburger" aria-hidden="true"></span>
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu" role="list">
+        <li><a href="#about" class="nav-link">O nama</a></li>
+        <li><a href="#products" class="nav-link">Ponuda</a></li>
+        <li><a href="#contact" class="nav-link nav-cta">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <main id="main-content">
+    <section class="hero" id="hero" aria-label="Dobrodošlica">
+      <div class="hero-bg" aria-hidden="true">
+        <div class="hero-overlay"></div>
+        <div class="hero-particles" id="heroParticles" aria-hidden="true"></div>
+        <!-- SVG coffee steam decoration -->
+        <svg class="hero-deco" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <defs>
+            <radialGradient id="rg1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#c8956c" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#1a0f07" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="400" cy="300" r="300" fill="url(#rg1)"/>
+          <ellipse cx="400" cy="480" rx="180" ry="20" fill="#c8956c" fill-opacity="0.08"/>
+        </svg>
+      </div>
+
+      <div class="hero-content" data-animate="hero-in">
+        <div class="hero-badge" aria-label="Premium kvaliteta od 2020">
+            <span>Premium · od 2020</span>
+          </div>
+        <h1 class="hero-title">
+          <span class="title-line">Svaki trenutak</span>
+          <span class="title-line italic">zaslužuje savršeni</span>
+          <span class="title-line">napitak.</span>
+        </h1>
+        <p class="hero-desc">
+          Vrhunski automati za kavu, čaj, toplu čokoladu i grickalice — prilagođeni školama, firmama i domovima.
+        </p>
+        <div class="hero-actions">
+          <a href="#products" class="btn btn-primary">
+            <span>Pogledaj ponudu</span>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-ghost">Kontaktiraj nas</a>
+        </div>
+      </div>
+
+      <!-- Floating coffee cup illustration -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="cup-wrapper">
+          <svg class="coffee-cup" viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <!-- Cup body -->
+            <path d="M40 80 L50 220 Q55 240 80 245 L140 245 Q165 240 170 220 L180 80 Z" fill="none" stroke="#c8956c" stroke-width="2" opacity="0.8"/>
+            <!-- Cup handle -->
+            <path d="M180 110 Q220 110 220 150 Q220 190 180 190" fill="none" stroke="#c8956c" stroke-width="2" opacity="0.6"/>
+            <!-- Saucer -->
+            <ellipse cx="110" cy="250" rx="85" ry="10" fill="none" stroke="#c8956c" stroke-width="1.5" opacity="0.5"/>
+            <!-- Coffee surface -->
+            <ellipse cx="110" cy="82" rx="70" ry="12" fill="#c8956c" fill-opacity="0.2" stroke="#c8956c" stroke-width="1" opacity="0.7"/>
+            <!-- Latte art -->
+            <path d="M85 82 Q110 72 135 82" fill="none" stroke="#e8c4a0" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <!-- Steam paths -->
+            <path class="steam steam-1" d="M80 60 Q73 40 80 20 Q87 0 80 -20" fill="none" stroke="#c8956c" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+            <path class="steam steam-2" d="M110 55 Q103 35 110 15 Q117 -5 110 -25" fill="none" stroke="#c8956c" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+            <path class="steam steam-3" d="M140 60 Q133 40 140 20 Q147 0 140 -20" fill="none" stroke="#c8956c" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+          </svg>
+          <div class="cup-glow"></div>
+        </div>
+      </div>
+
+      <a href="#about" class="hero-scroll" aria-label="Scroll prema dolje">
+        <span class="scroll-text">Saznaj više</span>
+        <span class="scroll-line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- ============ STATS BAR ============ -->
+    <section class="stats-bar" aria-label="Naše statistike">
+      <div class="stats-container">
+        <div class="stat-item" data-animate="fade-up">
+          <span class="stat-number" data-count="85">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Instaliranih aparata</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item" data-animate="fade-up" data-delay="100">
+          <span class="stat-number" data-count="6">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Godina iskustva</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item" data-animate="fade-up" data-delay="200">
+          <span class="stat-number" data-count="50">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Zadovoljnih klijenata</span>
+        </div>
+        <div class="stat-divider" aria-hidden="true"></div>
+        <div class="stat-item" data-animate="fade-up" data-delay="300">
+          <span class="stat-number" data-count="24">0</span><span class="stat-suffix">/7</span>
+          <span class="stat-label">Servisna podrška</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="about" id="about" aria-labelledby="about-heading">
+      <div class="about-container">
+        <div class="about-visual" data-animate="fade-right">
+          <div class="about-img-frame">
+            <div class="about-img-placeholder" aria-label="An Coffee tim u akciji">
+              <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <defs>
+                  <linearGradient id="aboutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#2d1810"/>
+                    <stop offset="100%" stop-color="#1a0f07"/>
+                  </linearGradient>
+                </defs>
+                <rect width="500" height="600" fill="url(#aboutGrad)"/>
+                <!-- Abstract coffee beans -->
+                <ellipse cx="150" cy="200" rx="45" ry="60" fill="none" stroke="#c8956c" stroke-width="1.5" opacity="0.4" transform="rotate(-20 150 200)"/>
+                <line x1="150" y1="145" x2="150" y2="255" stroke="#c8956c" stroke-width="1" opacity="0.3" transform="rotate(-20 150 200)"/>
+                <ellipse cx="340" cy="380" rx="55" ry="70" fill="none" stroke="#c8956c" stroke-width="1.5" opacity="0.3" transform="rotate(15 340 380)"/>
+                <line x1="340" y1="315" x2="340" y2="445" stroke="#c8956c" stroke-width="1" opacity="0.25" transform="rotate(15 340 380)"/>
+                <ellipse cx="260" cy="520" rx="35" ry="45" fill="none" stroke="#e8c4a0" stroke-width="1" opacity="0.2" transform="rotate(-10 260 520)"/>
+                <!-- Decorative text -->
+                <text x="50" y="480" font-family="Georgia, serif" font-size="64" fill="#c8956c" fill-opacity="0.08" font-style="italic">An</text>
+                <text x="90" y="555" font-family="Georgia, serif" font-size="64" fill="#c8956c" fill-opacity="0.08" font-style="italic">Coffee</text>
+                <!-- Grid lines -->
+                <line x1="0" y1="300" x2="500" y2="300" stroke="#c8956c" stroke-width="0.5" opacity="0.1"/>
+                <line x1="250" y1="0" x2="250" y2="600" stroke="#c8956c" stroke-width="0.5" opacity="0.1"/>
+                <!-- Central icon -->
+                <circle cx="250" cy="280" r="80" fill="none" stroke="#c8956c" stroke-width="1" opacity="0.25"/>
+                <circle cx="250" cy="280" r="60" fill="none" stroke="#c8956c" stroke-width="0.5" opacity="0.15"/>
+                <text x="214" y="296" font-size="52" opacity="0.5">☕</text>
+              </svg>
+            </div>
+            <div class="about-img-accent" aria-hidden="true"></div>
+          </div>
+          <div class="about-badge-float" aria-hidden="true">
+            <span class="badge-year">2020</span>
+            <span class="badge-text">Osnivanje</span>
+          </div>
+        </div>
+
+        <div class="about-content" data-animate="fade-left">
+          <div class="section-label" aria-hidden="true">O nama</div>
+          <h2 class="about-heading" id="about-heading">
+            Strast prema savršenom napitku,<br />
+            <em>u svakom prostoru.</em>
+          </h2>
+          <p class="about-text">
+            An Coffee je osnovan s jednom jedinom misijom — donijeti premium iskustvo napitaka tamo gdje je to najvažnije. U školama, firmama, domovima i javnim prostorima.
+          </p>
+          <p class="about-text">
+            Vjerujemo da svaki pauza zaslužuje kvalitetan trenutak. Naši aparati nude pažljivo odabrane kave, čajeve, toplu čokoladu i grickalice — sve uz minimalan napor i maksimalan okus.
+          </p>
+          <div class="about-pillars">
+            <div class="pillar">
+              <span class="pillar-icon" aria-hidden="true">◆</span>
+              <div>
+                <strong>Kvaliteta bez kompromisa</strong>
+                <p>Isključivo premium sastojci i certificirani aparati.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <span class="pillar-icon" aria-hidden="true">◆</span>
+              <div>
+                <strong>Servis na licu mjesta</strong>
+                <p>Redovno punjenje i održavanje — bez brige za vas.</p>
+              </div>
+            </div>
+            <div class="pillar">
+              <span class="pillar-icon" aria-hidden="true">◆</span>
+              <div>
+                <strong>Prilagodba prostoru</strong>
+                <p>Svaki aparat konfiguriramo prema vašim potrebama.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRODUCTS ============ -->
+    <section class="products" id="products" aria-labelledby="products-heading">
+      <div class="products-container">
+        <div class="section-header" data-animate="fade-up">
+          <div class="section-label">Naša ponuda</div>
+          <h2 class="section-title" id="products-heading">Aparati za svaku <em>prigodu</em></h2>
+          <p class="section-subtitle">Od ranog jutra do kasne večeri — rješenja prilagođena svakom okruženju.</p>
+        </div>
+
+        <div class="products-grid">
+          <!-- Card 1 -->
+          <article class="product-card" data-animate="fade-up" aria-label="Aparati za tople napitke">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 22 L14 50 Q16 58 25 58 L35 58 Q44 58 46 50 L50 22 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M50 28 Q62 28 62 38 Q62 48 50 48" fill="none" stroke="currentColor" stroke-width="1.5"/><ellipse cx="30" cy="23" rx="20" ry="4" fill="none" stroke="currentColor" stroke-width="1"/><path d="M22 12 Q19 6 22 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M30 10 Q27 4 30 -2" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M38 12 Q35 6 38 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <h3 class="card-title">Tople pauze</h3>
+            <p class="card-desc">Espresso, cappuccino, latte, čaj, topla čokolada — sve iz jednog aparata. Svježe mljevena kava na pritisak gumba.</p>
+            <ul class="card-list" aria-label="Dostupni napitci">
+              <li>Espresso & lungo</li>
+              <li>Cappuccino & latte</li>
+              <li>Čaj & biljni infuzi</li>
+              <li>Topla čokolada</li>
+            </ul>
+            <div class="card-tag">Najpopularnije</div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="product-card product-card--accent" data-animate="fade-up" data-delay="120" aria-label="Aparati za hladna pića i sokove">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="15" y="8" width="30" height="50" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15 20 L45 20" stroke="currentColor" stroke-width="1"/><path d="M15 32 L45 32" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3 3"/><circle cx="30" cy="42" r="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M20 8 Q20 2 30 2 Q40 2 40 8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <h3 class="card-title">Hladna pića</h3>
+            <p class="card-desc">Svježi sokovi, energetska pića, gazirani napitci i voda — savršeni za vruće dane i aktivne prostore.</p>
+            <ul class="card-list" aria-label="Dostupna pića">
+              <li>Prirodni sokovi</li>
+              <li>Gazirani napitci</li>
+              <li>Energetska pića</li>
+              <li>Mineralna voda</li>
+            </ul>
+            <div class="card-tag card-tag--light">Idealno za ljetne dane</div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="product-card" data-animate="fade-up" data-delay="240" aria-label="Aparati za grickalice i slatkiše">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="8" y="10" width="44" height="46" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 26 L52 26" stroke="currentColor" stroke-width="1"/><path d="M8 40 L52 40" stroke="currentColor" stroke-width="1"/><rect x="14" y="14" width="10" height="8" rx="2" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="1"/><rect x="30" y="14" width="14" height="8" rx="2" fill="currentColor" fill-opacity="0.15" stroke="currentColor" stroke-width="1"/><rect x="14" y="30" width="14" height="7" rx="2" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="1"/><rect x="32" y="30" width="12" height="7" rx="2" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="1"/></svg>
+            </div>
+            <h3 class="card-title">Grickalice & slatkiši</h3>
+            <p class="card-desc">Pažljivo odabrani asortiman grickalica, čokolada i slatkiša — popunjenih redovito i uvijek svježih.</p>
+            <ul class="card-list" aria-label="Dostupne grickalice">
+              <li>Čokolade & bombone</li>
+              <li>Čips & slane grickalice</li>
+              <li>Energetske pločice</li>
+              <li>Orasi & sušeno voće</li>
+            </ul>
+            <div class="card-tag">Za svaki džep</div>
+          </article>
+        </div>
+
+        <!-- Placements -->
+        <div class="placements" data-animate="fade-up">
+          <p class="placements-lead">Naši aparati prisutni su u:</p>
+          <div class="placements-grid" aria-label="Mjesta postavljanja aparata">
+            <div class="placement-item">
+              <span aria-hidden="true">🏫</span>
+              <span>Škole</span>
+            </div>
+            <div class="placement-item">
+              <span aria-hidden="true">🏢</span>
+              <span>Firme</span>
+            </div>
+            <div class="placement-item">
+              <span aria-hidden="true">🏥</span>
+              <span>Domovi</span>
+            </div>
+            <div class="placement-item">
+              <span aria-hidden="true">🏋️</span>
+              <span>Teretane</span>
+            </div>
+            <div class="placement-item">
+              <span aria-hidden="true">🏨</span>
+              <span>Hoteli</span>
+            </div>
+            <div class="placement-item">
+              <span aria-hidden="true">🏛️</span>
+              <span>Javne institucije</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA BAND ============ -->
+    <section class="cta-band" aria-labelledby="cta-heading">
+      <div class="cta-container" data-animate="fade-up">
+        <p class="cta-pre">Spremi za suradnju?</p>
+        <h2 class="cta-title" id="cta-heading">Instalirajmo aparat <em>zajedno.</em></h2>
+        <a href="#contact" class="btn btn-primary btn-large">Zatraži ponudu</a>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="contact" id="contact" aria-labelledby="contact-heading">
+      <div class="contact-container">
+        <div class="contact-info" data-animate="fade-right">
+          <div class="section-label">Kontakt</div>
+          <h2 class="contact-heading" id="contact-heading">
+            Budimo <em>u kontaktu.</em>
+          </h2>
+          <p class="contact-intro">
+            Pišite nam, nazovite ili svratite — rado ćemo vam predložiti optimalno rješenje za vaš prostor.
+          </p>
+
+          <div class="contact-items">
+            <div class="contact-item">
+                <div class="contact-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5Z" stroke="currentColor" stroke-width="1.5"/><path d="M2 5l9 7 9-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div class="contact-detail">
+                <span class="contact-label">E-mail</span>
+                <a href="mailto:ancoffee1@gmail.com" class="contact-value">ancoffee1@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 2h4l2 5-2.5 1.5a11 11 0 0 0 6 6L15 12l5 2v4a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="contact-detail">
+                <span class="contact-label">Telefon</span>
+                <a href="tel:+385994896273" class="contact-value">+385 99 489 6273</a>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M11 2C7.686 2 5 4.686 5 8c0 5 6 12 6 12s6-7 6-12c0-3.314-2.686-6-6-6Z" stroke="currentColor" stroke-width="1.5"/><circle cx="11" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/></svg>
+              </div>
+                <div class="contact-detail">
+                <span class="contact-label">Adresa</span>
+                <address class="contact-value" style="font-style:normal;">Ulica Lipa 26, 32100 Vinkovci</address>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="11" cy="11" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M11 6v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <div class="contact-detail">
+                <span class="contact-label">Radno vrijeme</span>
+                <span class="contact-value">Pon–Pet: 08:00–17:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map placeholder -->
+        <div class="contact-map" data-animate="fade-left" aria-label="Karta lokacije An Coffee u Vinkovci">
+          <div class="map-wrapper">
+            <iframe
+              title="An Coffee lokacija u Vinkovci"
+              src="https://www.google.com/maps?q=Ulica+Lipa+26,+32100+Vinkovci&z=15&output=embed"
+              width="100%"
+              height="100%"
+              style="border:0; filter: contrast(1.05) saturate(1.15);"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <div class="map-overlay-label" aria-hidden="true">
+              <span>☕</span>
+              <span>An Coffee, Vinkovci</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo footer-logo" aria-label="An Coffee – Povratak na vrh">
+          <span class="logo-mark" aria-hidden="true">☕</span>
+          <span class="logo-text">An <em>Coffee</em></span>
+        </a>
+        <p class="footer-tagline">Premium napitci za svaki prostor.</p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigacija">
+        <a href="#about">O nama</a>
+        <a href="#products">Ponuda</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+
+      <div class="footer-social" aria-label="Društvene mreže">
+        <a href="https://www.instagram.com/puljicante42/" target="_blank" rel="noopener noreferrer" aria-label="Ante Puljić na Instagramu" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100006130369375" target="_blank" rel="noopener noreferrer" aria-label="Ante Puljić na Facebooku" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/ancoffee" target="_blank" rel="noopener noreferrer" aria-label="An Coffee na LinkedInu" class="social-link">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" stroke-width="1.5"/><path d="M7 10v7M7 7v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> An Coffee. Sva prava pridržana.</p>
+      <p class="footer-legal">
+        <a href="/privatnost" rel="noopener">Politika privatnosti</a>
+        <span aria-hidden="true">·</span>
+        <a href="/uvjeti" rel="noopener">Uvjeti korištenja</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="backToTop" aria-label="Povratak na vrh stranice">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 15V5M5 10l5-5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
