@@ -15,42 +15,23 @@ let navStatePushed = false;
 const toggleNavigation = () => {
   if (!navToggle || !navMenu) return;
   const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-
   if (!expanded) {
     navToggle.setAttribute('aria-expanded', 'true');
     navMenu.classList.add('is-open');
-    try {
-      history.pushState({ navOpen: true }, '');
-      navStatePushed = true;
-    } catch (e) {
-      navStatePushed = false;
-    }
   } else {
-    closeNavigation(true);
+    closeNavigation();
   }
 };
 
-const closeNavigation = (shouldPopHistory = false) => {
+const closeNavigation = () => {
   if (!navMenu || !navMenu.classList.contains('is-open')) return;
   if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
   navMenu.classList.remove('is-open');
-
-  if (shouldPopHistory && navStatePushed) {
-    try { history.back(); } catch (e) { /* ignore */ }
-  }
-
-  navStatePushed = false;
 };
 
-const handleNavLinkClick = (event) => {
+const handleNavLinkClick = () => {
   if (!navMenu || !navToggle) return;
-  const isHashLink = event.currentTarget.hash && event.currentTarget.pathname === window.location.pathname;
-
   if (window.innerWidth <= 900) {
-    if (navStatePushed && isHashLink) {
-      try { history.replaceState(null, '', window.location.href); } catch (e) { /* ignore */ }
-      navStatePushed = false;
-    }
     closeNavigation();
     navToggle.focus();
   }
@@ -181,13 +162,6 @@ const handleEscape = (event) => {
     if (navToggle) navToggle.focus();
   }
 };
-
-// Close nav when browser back/forward is used
-window.addEventListener('popstate', () => {
-  if (navMenu && navMenu.classList.contains('is-open')) {
-    closeNavigation();
-  }
-});
 
 // Close nav when clicking outside on mobile
 document.addEventListener('click', (e) => {
