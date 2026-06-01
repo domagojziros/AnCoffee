@@ -1,219 +1,237 @@
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('.nav-link');
-const navbar = document.getElementById('navbar');
-const backToTop = document.getElementById('backToTop');
-const heroParticles = document.getElementById('heroParticles');
-const animatedElements = document.querySelectorAll('[data-animate]');
-const statsItems = document.querySelectorAll('.stat-item');
-const galleryItems = document.querySelectorAll('.gallery-img');
-const currentYear = document.getElementById('year');
+/**
+ * An Coffee — script.js
+ * Navbar + right-side drawer (klizi s desna na lijevo), full keyboard/focus management,
+ * scroll-lock, staggered link entrance, rAF scroll throttle, eased stats counter.
+ */
+
+/* ─── Selectors ────────────────────────────────────────────── */
+const navbar         = document.getElementById('navbar');
+const navToggle      = document.getElementById('navToggle');
+const navDrawer      = document.getElementById('navDrawer');
+const drawerBackdrop = document.getElementById('drawerBackdrop');
+const drawerClose    = document.getElementById('drawerClose');
+const drawerLinks    = document.querySelectorAll('.drawer-link');
+const desktopLinks   = document.querySelectorAll('.desktop-link');
+const backToTop      = document.getElementById('backToTop');
+const heroParticles  = document.getElementById('heroParticles');
+const statsItems     = document.querySelectorAll('.stat-item');
+const galleryItems   = document.querySelectorAll('.gallery-img');
+const animatedEls    = document.querySelectorAll('[data-animate]');
+const yearEl         = document.getElementById('year');
+
+const BREAKPOINT           = 900;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-let navStatePushed = false;
+/* ─── Drawer state ─────────────────────────────────────────── */
+let drawerOpen = false;
 
-const toggleNavigation = () => {
-  if (!navToggle || !navMenu) return;
-  const expanded = navToggle.getAttribute('aria-expanded') === 'true';
-  if (!expanded) {
-    navToggle.setAttribute('aria-expanded', 'true');
-    navMenu.classList.add('is-open');
-  } else {
-    closeNavigation();
+const openDrawer = () => {
+  if (drawerOpen) return;
+  drawerOpen = true;
+
+  navToggle.setAttribute('aria-expanded', 'true');
+  navDrawer.setAttribute('aria-hidden', 'false');
+  navDrawer.classList.add('is-open');
+  drawerBackdrop.classList.add('is-visible');
+
+  // Scroll-lock body
+  document.body.style.overflow = 'hidden';
+
+  // Stagger drawer links entrance
+  drawerLinks.forEach((link, i) => {
+    link.style.transitionDelay = `${80 + i * 70}ms`;
+  });
+
+  // Move focus into drawer so screen-readers announce it
+  requestAnimationFrame(() => {
+    const firstLink = navDrawer.querySelector('.drawer-link');
+    if (firstLink) firstLink.focus();
+  });
+};
+
+const closeDrawer = (returnFocus = true) => {
+  if (!drawerOpen) return;
+  drawerOpen = false;
+
+  navToggle.setAttribute('aria-expanded', 'false');
+  navDrawer.setAttribute('aria-hidden', 'true');
+  navDrawer.classList.remove('is-open');
+  drawerBackdrop.classList.remove('is-visible');
+
+  document.body.style.overflow = '';
+
+  // Reset stagger delays so re-open animates again
+  drawerLinks.forEach(link => { link.style.transitionDelay = '0ms'; });
+
+  if (returnFocus) navToggle.focus();
+};
+
+/* Focus trap inside drawer */
+const trapFocus = (e) => {
+  if (!drawerOpen) return;
+  const focusable = Array.from(
+    navDrawer.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')
+  );
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last  = focusable[focusable.length - 1];
+
+  if (e.key === 'Tab') {
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault(); last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault(); first.focus();
+    }
   }
 };
 
-const closeNavigation = () => {
-  if (!navMenu || !navMenu.classList.contains('is-open')) return;
-  if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-  navMenu.classList.remove('is-open');
+/* ─── Scroll handler (rAF-throttled) ──────────────────────── */
+let ticking = false;
+const onScroll = () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    const y = window.scrollY;
+    navbar?.classList.toggle('scrolled', y > 24);
+    backToTop?.classList.toggle('visible', y > window.innerHeight * 0.5);
+    ticking = false;
+  });
 };
 
-const handleNavLinkClick = () => {
-  if (!navMenu || !navToggle) return;
-  if (window.innerWidth <= 900) {
-    closeNavigation();
-    navToggle.focus();
-  }
-};
+/* ─── Stats counter ────────────────────────────────────────── */
+const easeOutQuart = t => 1 - (1 - t) ** 4;
 
-const handleScroll = () => {
-  const offset = window.scrollY;
-  if (navbar) navbar.classList.toggle('scrolled', offset > 24);
-  if (backToTop) backToTop.classList.toggle('visible', offset > window.innerHeight * 0.5);
-};
-
-const animateStats = (entry) => {
-  if (!entry.isIntersecting) return;
-
-  statsItems.forEach((item) => {
-    const valueElement = item.querySelector('.stat-number');
-    if (!valueElement || valueElement.dataset.animated) return;
-
-    const target = Number(valueElement.dataset.count || 0);
-    const start = performance.now();
-    const duration = 1200;
-
-    const step = (timestamp) => {
-      const progress = Math.min((timestamp - start) / duration, 1);
-      const current = Math.floor(progress * target);
-      valueElement.textContent = `${current}`;
-
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      } else {
-        valueElement.textContent = `${target}`;
-      }
+const animateStats = () => {
+  statsItems.forEach(item => {
+    const el = item.querySelector('.stat-number');
+    if (!el || el.dataset.animated) return;
+    el.dataset.animated = 'true';
+    const target   = Number(el.dataset.count ?? 0);
+    const start    = performance.now();
+    const duration = 1400;
+    const step = now => {
+      const p = Math.min((now - start) / duration, 1);
+      el.textContent = String(Math.floor(easeOutQuart(p) * target));
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = String(target);
     };
-
-    valueElement.dataset.animated = 'true';
-    window.requestAnimationFrame(step);
+    requestAnimationFrame(step);
   });
 };
 
+/* ─── Lazy gallery ─────────────────────────────────────────── */
 const loadGalleryImage = (container) => {
-  const imgSrc = container.dataset.src;
-  if (!imgSrc || container.dataset.loaded) return;
-
-  const parent = container.closest('.gallery-item');
-  const captionText = parent?.querySelector('.gallery-caption span')?.textContent || 'Galerija';
-  const image = document.createElement('img');
-  image.loading = 'lazy';
-  image.decoding = 'async';
-  image.alt = captionText ? String(captionText) : '';
-  image.src = imgSrc;
-  image.addEventListener('error', () => {
-    image.remove();
-  });
-
-  container.appendChild(image);
+  const src = container.dataset.src;
+  if (!src || container.dataset.loaded) return;
+  const caption = container.closest('.gallery-item')
+    ?.querySelector('.gallery-caption span')?.textContent ?? 'Galerija';
+  const img    = new Image();
+  img.loading  = 'lazy';
+  img.decoding = 'async';
+  img.alt      = caption;
+  img.onerror  = () => img.remove();
+  img.src      = src;
+  container.appendChild(img);
   container.dataset.loaded = 'true';
 };
 
-const observeAnimations = () => {
+/* ─── IntersectionObservers ────────────────────────────────── */
+const setupObservers = () => {
   if (prefersReducedMotion) {
-    animatedElements.forEach((el) => el.classList.add('is-visible'));
-    statsItems.forEach((item) => {
-      const number = item.querySelector('.stat-number');
-      if (number) number.textContent = number.dataset.count || '0';
+    animatedEls.forEach(el => el.classList.add('is-visible'));
+    statsItems.forEach(item => {
+      const n = item.querySelector('.stat-number');
+      if (n) n.textContent = n.dataset.count ?? '0';
     });
     galleryItems.forEach(loadGalleryImage);
     return;
   }
 
-  const observerOptions = { threshold: 0.2 };
+  const opts = { threshold: 0.2 };
 
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
+  const revealObs = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('is-visible');
-      const anim = entry.target.dataset.animate;
-      if (anim === 'fade-up' || anim === 'fade-left' || anim === 'fade-right') {
-        observer.unobserve(entry.target);
+      if (['fade-up','fade-left','fade-right'].includes(entry.target.dataset.animate)) {
+        obs.unobserve(entry.target);
       }
     });
-  }, observerOptions);
+  }, opts);
+  animatedEls.forEach(el => revealObs.observe(el));
 
-  animatedElements.forEach((el) => revealObserver.observe(el));
-
-  const statsObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
+  const statsObs = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      animateStats(entry);
-      observer.unobserve(entry.target);
+      animateStats();
+      obs.unobserve(entry.target);
     });
-  }, observerOptions);
+  }, opts);
+  statsItems.forEach(item => statsObs.observe(item));
 
-  statsItems.forEach((item) => statsObserver.observe(item));
-
-  const galleryObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
+  const galleryObs = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       loadGalleryImage(entry.target);
-      observer.unobserve(entry.target);
+      obs.unobserve(entry.target);
     });
   }, { rootMargin: '120px 0px', threshold: 0.1 });
-
-  galleryItems.forEach((container) => galleryObserver.observe(container));
+  galleryItems.forEach(c => galleryObs.observe(c));
 };
 
-const createHeroParticles = () => {
-  if (!heroParticles) return;
-
-  const particleCount = 14;
-  const fragment = document.createDocumentFragment();
-
-  for (let i = 0; i < particleCount; i += 1) {
-    const particle = document.createElement('span');
-    particle.className = 'particle';
-    particle.style.left = `${Math.random() * 96}%`;
-    particle.style.top = `${Math.random() * 96}%`;
-    particle.style.setProperty('--delay', `${(Math.random() * 8).toFixed(2)}s`);
-    particle.style.setProperty('--dur', `${(6 + Math.random() * 8).toFixed(2)}s`);
-    fragment.appendChild(particle);
+/* ─── Hero particles ───────────────────────────────────────── */
+const createParticles = () => {
+  if (!heroParticles || prefersReducedMotion) return;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < 14; i++) {
+    const s = document.createElement('span');
+    s.className = 'particle';
+    s.style.cssText = `left:${(Math.random()*96).toFixed(1)}%;top:${(Math.random()*96).toFixed(1)}%;--delay:${(Math.random()*8).toFixed(2)}s;--dur:${(6+Math.random()*8).toFixed(2)}s`;
+    frag.appendChild(s);
   }
-
-  heroParticles.appendChild(fragment);
+  heroParticles.appendChild(frag);
 };
 
-const handleEscape = (event) => {
-  if (event.key === 'Escape' && navMenu && navMenu.classList.contains('is-open')) {
-    closeNavigation();
-    if (navToggle) navToggle.focus();
-  }
-};
-
-// Close nav when clicking outside on mobile
-document.addEventListener('click', (e) => {
-  if (!navMenu || !navToggle) return;
-  const isClickInside = navMenu.contains(e.target) || navToggle.contains(e.target);
-  if (!isClickInside && navMenu.classList.contains('is-open')) {
-    closeNavigation();
-  }
-});
-
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
-const setYear = () => {
-  if (!currentYear) return;
-  currentYear.textContent = new Date().getFullYear();
-};
-
+/* ─── Init ─────────────────────────────────────────────────── */
 const init = () => {
-  setYear();
+  // Year
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  if (navToggle && navMenu) {
-    navToggle.addEventListener('click', toggleNavigation);
-    navToggle.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggleNavigation();
-      }
-    });
-  }
+  // Particles + observers
+  createParticles();
+  setupObservers();
+  onScroll();
 
-  navLinks.forEach((link) => link.addEventListener('click', handleNavLinkClick));
+  // Hamburger toggle
+  navToggle?.addEventListener('click', () => drawerOpen ? closeDrawer() : openDrawer());
 
-  if (backToTop) {
-    backToTop.addEventListener('click', scrollToTop);
-  }
+  // Backdrop click closes drawer
+  drawerBackdrop?.addEventListener('click', () => closeDrawer());
 
-  window.addEventListener('scroll', () => {
-    window.requestAnimationFrame(handleScroll);
-  }, { passive: true });
+  // Drawer links close drawer on click
+  drawerLinks.forEach(link => link.addEventListener('click', () => closeDrawer(false)));
 
-  window.addEventListener('resize', () => {
-    if (navMenu && window.innerWidth > 900 && navMenu.classList.contains('is-open')) {
-      closeNavigation();
-    }
+  // Desktop links — no drawer involvement
+  desktopLinks.forEach(link => link.addEventListener('click', () => {
+    if (window.innerWidth <= BREAKPOINT) closeDrawer(false);
+  }));
+
+  // Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && drawerOpen) closeDrawer();
+    trapFocus(e);
   });
 
-  window.addEventListener('keydown', handleEscape);
-  observeAnimations();
-  createHeroParticles();
-  handleScroll();
+  // Resize: close drawer if viewport widens past breakpoint
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > BREAKPOINT && drawerOpen) closeDrawer(false);
+  }, { passive: true });
+
+  // Scroll
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Back to top
+  backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 };
 
 document.addEventListener('DOMContentLoaded', init);

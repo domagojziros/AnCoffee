@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
   <!-- Primary Meta Tags -->
-  <title>An Coffee — Premium Aparati za Kavu, Čaj & Grickalice</title>
+  <title>An Coffee — Vrhunski Aparati za Kavu, Čaj & Grickalice</title>
   <meta name="description" content="An Coffee nudi premium automate za kavu, čaj, toplu čokoladu, sokove i grickalice za škole, firme i domove. Elegantno rješenje za svaki prostor." />
   <meta name="keywords" content="aparati za kavu, automati za kavu, vending automati, samoposlužni aparati,škole, firme, domovi, čaj, topla čokolada, sokovi, grickalice, vending machine" />
   <meta name="author" content="An Coffee" />
@@ -16,7 +16,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://ancoffee.hr/" />
-  <meta property="og:title" content="An Coffee — Premium Aparati za Kavu & Grickalice" />
+  <meta property="og:title" content="An Coffee — Vrhunski Aparati za Kavu & Grickalice" />
   <meta property="og:description" content="Premium vending rješenja za kavu, čaj, toplu čokoladu i grickalice. Namijenjeno školama, firmama i domovima." />
   <meta property="og:image" content="https://ancoffee.hr/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
@@ -97,19 +97,40 @@
         <span class="logo-text">An <em>Coffee</em></span>
       </a>
 
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Otvori izbornik">
+      <!-- Desktop nav links -->
+      <ul class="nav-menu" role="list">
+        <li><a href="#about" class="nav-link desktop-link">O nama</a></li>
+        <li><a href="#products" class="nav-link desktop-link">Ponuda</a></li>
+        <li><a href="#contact" class="nav-link nav-cta desktop-link">Kontakt</a></li>
+      </ul>
+
+      <!-- Hamburger toggle (mobile only) -->
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navDrawer" aria-label="Otvori izbornik">
         <span class="hamburger" aria-hidden="true"></span>
         <span class="hamburger" aria-hidden="true"></span>
         <span class="hamburger" aria-hidden="true"></span>
       </button>
-
-      <ul class="nav-menu" id="navMenu" role="list">
-        <li><a href="#about" class="nav-link">O nama</a></li>
-        <li><a href="#products" class="nav-link">Ponuda</a></li>
-        <li><a href="#contact" class="nav-link nav-cta">Kontakt</a></li>
-      </ul>
     </nav>
   </header>
+
+  <!-- ============ DRAWER (mobile) ============ -->
+  <div class="drawer-backdrop" id="drawerBackdrop" aria-hidden="true"></div>
+  <nav class="nav-drawer" id="navDrawer" aria-label="Mobilna navigacija" aria-hidden="true">
+    <ul class="drawer-nav" role="list">
+      <li><a href="#about"    class="drawer-link">O nama</a></li>
+      <li><a href="#products" class="drawer-link">Ponuda</a></li>
+      <li><a href="#contact"  class="drawer-link drawer-link--cta">Kontakt</a></li>
+    </ul>
+
+    <div class="drawer-footer">
+      <a href="https://www.instagram.com/puljicante42/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="drawer-social">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=100006130369375" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="drawer-social">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </nav>
 
   <!-- ============ HERO ============ -->
   <main id="main-content">
@@ -132,7 +153,7 @@
 
       <div class="hero-content" data-animate="hero-in">
         <div class="hero-badge" aria-label="Premium kvaliteta od 2020">
-            <span>Premium · od 2020</span>
+            <span>An Coffee· od 2020</span>
           </div>
         <h1 class="hero-title">
           <span class="title-line">Svaki trenutak</span>
@@ -252,7 +273,7 @@
             <em>u svakom prostoru.</em>
           </h2>
           <p class="about-text">
-            An Coffee je osnovan s jednom jedinom misijom — donijeti premium iskustvo napitaka tamo gdje je to najvažnije. U školama, firmama, domovima i javnim prostorima.
+            An Coffee je osnovan s jednom jedinom misijom — donijeti vrhunsko iskustvo napitaka tamo gdje je to najvažnije. U školama, firmama, domovima i javnim prostorima.
           </p>
           <p class="about-text">
             Vjerujemo da svaki pauza zaslužuje kvalitetan trenutak. Naši aparati nude pažljivo odabrane kave, čajeve, toplu čokoladu i grickalice — sve uz minimalan napor i maksimalan okus.
@@ -262,7 +283,7 @@
               <span class="pillar-icon" aria-hidden="true">◆</span>
               <div>
                 <strong>Kvaliteta bez kompromisa</strong>
-                <p>Isključivo premium sastojci i certificirani aparati.</p>
+                <p>Isključivo vrhunski sastojci i certificirani aparati.</p>
               </div>
             </div>
             <div class="pillar">
@@ -492,7 +513,15 @@
     </div>
 
     <div class="footer-bottom">
-      <p>© <span id="year"></span> An Coffee. Sva prava pridržana.</p>
+      <div class="footer-legal-info">
+        <p>An coffee d.o.o. · Ulica lipa 26, 32100 Vinkovci · OIB: 17706412769 · MB: 05347785</p>
+      </div>
+      <div class="footer-bottom-row">
+        <p>© <span id="year"></span> An Coffee. Sva prava pridržana.</p>
+        <nav class="footer-legal-links" aria-label="Pravni dokumenti">
+          <a href="privacy-policy.html">Pravila privatnosti</a>
+        </nav>
+      </div>
     </div>
   </footer>
 

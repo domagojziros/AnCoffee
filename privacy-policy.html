@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="hr" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pravila privatnosti — An Coffee</title>
+  <meta name="robots" content="noindex, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a0f07'/><text y='24' x='4' font-size='20'>☕</text></svg>" />
+  <style>
+    :root {
+      --clr-espresso:   #1a0f07;
+      --clr-dark-roast: #2d1810;
+      --clr-caramel:    #c8956c;
+      --clr-cream:      #e8c4a0;
+      --clr-white:      #fdfaf7;
+      --font-display:   'Cormorant Garamond', Georgia, serif;
+      --font-body:      'DM Sans', system-ui, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--clr-white);
+      background: var(--clr-espresso);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--clr-caramel); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Nav */
+    .topbar {
+      position: sticky;
+      top: 0;
+      background: rgba(26,15,7,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(200,149,108,0.12);
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      z-index: 100;
+    }
+    .topbar a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--clr-cream);
+      text-decoration: none;
+    }
+    .topbar a em { font-style: italic; color: var(--clr-caramel); }
+    .back-link {
+      margin-left: auto;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      color: rgba(232,196,160,0.6) !important;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.375rem;
+    }
+    .back-link:hover { color: var(--clr-caramel) !important; text-decoration: none; }
+
+    /* Content */
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+    .page-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clr-caramel);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--clr-white);
+      margin-bottom: 0.5rem;
+    }
+    h1 em { font-style: italic; color: var(--clr-caramel); }
+    .updated {
+      font-size: 0.875rem;
+      color: rgba(232,196,160,0.45);
+      margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(200,149,108,0.12);
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--clr-cream);
+      margin: 2.5rem 0 0.75rem;
+    }
+    p { color: rgba(245,237,228,0.78); margin-bottom: 1rem; }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+    ul li {
+      padding: 0.25rem 0 0.25rem 1.25rem;
+      color: rgba(245,237,228,0.78);
+      position: relative;
+    }
+    ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--clr-caramel);
+    }
+
+    .company-box {
+      margin-top: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(45,24,16,0.5);
+      border: 1px solid rgba(200,149,108,0.15);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      color: rgba(232,196,160,0.7);
+      line-height: 1.8;
+    }
+    .company-box strong { color: var(--clr-cream); }
+
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(200,149,108,0.1);
+      font-size: 0.8rem;
+      color: rgba(200,149,108,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <a href="index.html">
+      <span aria-hidden="true">☕</span>
+      An <em>Coffee</em>
+    </a>
+    <a href="index.html" class="back-link" aria-label="Povratak na naslovnu stranicu">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Povratak
+    </a>
+  </header>
+
+  <main class="page">
+    <p class="page-label">Pravni dokumenti</p>
+    <h1>Pravila <em>privatnosti</em></h1>
+    <p class="updated">Posljednja izmjena: lipanj 2025.</p>
+
+    <h2>1. Tko smo</h2>
+    <p>Voditelj obrade osobnih podataka je:</p>
+    <div class="company-box">
+      <strong>An coffee d.o.o.</strong><br>
+      Ulica lipa 26, 32100 Vinkovci<br>
+      OIB: 17706412769<br>
+      MB: 05347785<br>
+      E-mail: <a href="mailto:ancoffee1@gmail.com">ancoffee1@gmail.com</a><br>
+      Telefon: <a href="tel:+385994896273">+385 99 489 6273</a>
+    </div>
+
+    <h2>2. Koje podatke prikupljamo</h2>
+    <p>Prikupljamo samo podatke koje nam sami dostavite, i to isključivo kada nas kontaktirate:</p>
+    <ul>
+      <li>Ime i prezime</li>
+      <li>E-mail adresa</li>
+      <li>Broj telefona (ako ga navedete)</li>
+      <li>Naziv tvrtke ili ustanove (ako je primjenjivo)</li>
+      <li>Sadržaj poruke koju ste nam poslali</li>
+    </ul>
+    <p>Ova web stranica ne koristi kolačiće za praćenje, ne pokreće remarketing oglase i ne dijeli vaše podatke s trećim stranama.</p>
+
+    <h2>3. Zašto prikupljamo podatke</h2>
+    <p>Vaše podatke koristimo isključivo radi odgovora na vaš upit ili dogovaranja suradnje. Ne šaljemo newsletter niti marketinške poruke bez vašeg izričitog pristanka.</p>
+
+    <h2>4. Koliko dugo čuvamo podatke</h2>
+    <p>Podatke iz kontaktnih upita čuvamo najviše 12 mjeseci od posljednje komunikacije, nakon čega ih trajno brišemo.</p>
+
+    <h2>5. Vaša prava</h2>
+    <p>Sukladno Općoj uredbi o zaštiti podataka (GDPR), imate pravo:</p>
+    <ul>
+      <li>Zatražiti uvid u podatke koje o vama imamo</li>
+      <li>Zatražiti ispravak netočnih podataka</li>
+      <li>Zatražiti brisanje vaših podataka</li>
+      <li>Povući pristanak u bilo kojem trenutku</li>
+      <li>Podnijeti pritužbu Agenciji za zaštitu osobnih podataka (AZOP)</li>
+    </ul>
+    <p>Zahtjeve možete uputiti na <a href="mailto:ancoffee1@gmail.com">ancoffee1@gmail.com</a>. Odgovoriti ćemo u roku od 30 dana.</p>
+
+    <h2>6. Sigurnost podataka</h2>
+    <p>Primjenjujemo razumne tehničke mjere zaštite kako bismo spriječili neovlašteni pristup vašim podacima. Komunikacija s ovom stranicom odvija se putem HTTPS enkripcije.</p>
+
+    <h2>7. Vanjske poveznice</h2>
+    <p>Ova stranica sadrži poveznice na Google Maps i društvene mreže (Instagram, Facebook). Za obradu podataka na tim platformama vrijede njihove vlastite politike privatnosti na koje nemamo utjecaj.</p>
+
+    <h2>8. Izmjene ovog dokumenta</h2>
+    <p>Zadržavamo pravo izmjene ovih pravila. U slučaju značajnih promjena, ažurirat ćemo datum izmjene na vrhu stranice.</p>
+
+    <h2>9. Kontakt</h2>
+    <p>Za sva pitanja vezana uz privatnost podataka pišite na <a href="mailto:ancoffee1@gmail.com">ancoffee1@gmail.com</a>.</p>
+  </main>
+
+  <footer class="page-footer">
+    <p>© <span id="yr"></span> An coffee d.o.o. · OIB: 17706412769</p>
+  </footer>
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>
